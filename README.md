@@ -4,3 +4,4 @@ This repository will contain python code examples. These examples will demonstra
 
 ## Examples:
 * vowels_text: a text based game requiring the player to guess which letters are vowels
+* jabberwocky: demonstrates text file handling and basic string manipulation and selection
