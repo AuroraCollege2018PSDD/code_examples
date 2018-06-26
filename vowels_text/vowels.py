@@ -18,7 +18,6 @@ alphabet = "abcdefghijklmnopqrstuvwxyz"
 vowels = "aeiou"
 correctGuesses = "-" * len(vowels)
 remainingGuesses = 10
-play = True
 
 #setup game
 print("DO YOU KNOW YOUR VOWELS?")
@@ -30,23 +29,32 @@ while remainingGuesses > 0:
     print("you have {} guesses left\n".format(remainingGuesses))
     print(alphabet+"\n")
     guess = input("pick a letter that you think is a vowel, or Q to quit: ")
+    
+    #check to see if the player wants to quit
     if guess == "Q":
         print("dumb or just chicken? thanks for playing")
         remainingGuesses = 0
-    elif guess in alphabet:
-        alphabet = alphabet.replace(guess, "-")
-        if guess in vowels:
+        
+    #otherwise play the game
+    elif guess in alphabet:  #check the player has selected an unused letter
+        alphabet = alphabet.replace(guess, "-") #remove the letter from available guesses
+        
+        if guess in vowels: #check to see if the guess is a vowel
+            #now we have to find the index of the letter so we can replace it
             for i in range(0, len(vowels)):
                 if guess == vowels[i]:
                     print("Correct!\n")
+                    #place the letter in the correct position in the correct guesses string
                     correctGuesses = correctGuesses[:i] + guess + correctGuesses[i+1:]
+                    #next check to see if all the vowels have been guessed
                     if correctGuesses == vowels:
                         print("\n WINNER! - Wow! Look who pain attention in Kindy!")
-                        remainingGuesses = 0
-        else:
+                        remainingGuesses = 0 #player has won so need to exit loop
+        
+        else: #the guess was incorrect
             remainingGuesses = remainingGuesses - 1
-            if remainingGuesses == 0:
+            if remainingGuesses == 0: #all guesses have been used up
                 print("seriously you loser...did you even go to kindy?")
 
-    else:
+    else: #the player did not choose a valid letter
         print("\nthat was a dumb guess you moron...try again \n")
